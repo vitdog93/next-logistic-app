@@ -347,13 +347,13 @@ function AddEdit({
           <Form.Item>
             <Space>
               <Button type="primary" htmlType="submit">
-                Summit
+                Submit
               </Button>
               <Button type="default" htmlType="reset">
                 Reset
               </Button>
-              <Link href="/orders" className="btn btn-link">
-                Cancel
+              <Link href="/orders">
+                <Button type="link">Cancel</Button>
               </Link>
             </Space>
           </Form.Item>
