@@ -1,3 +1,4 @@
+require("dotenv").config()
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -25,7 +26,7 @@ io.on("connection", (socket) => {
     socket.join(roomId);
     roomUsers = {
       ...roomUsers,
-      [roomId]: [...(roomUsers[roomId] ?? []), socket.id],
+      [roomId]: [...(roomUsers[roomId] || []), socket.id],
     };
     io.emit("users_response", roomUsers);
     debugPrint(`User with ID: ${socket.id} joined room: ${roomId}`);
