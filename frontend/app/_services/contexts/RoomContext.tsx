@@ -33,9 +33,9 @@ export default function RoomProvider({
   }, [myRooms]);
 
   async function fetchRoomsfromServer(): Promise<void> {
-    const url = process.env.NEXT_PUBLIC_BASE_URL || "http:localhost:4000/";
+    const url = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:4000/";
     // const response = await fetch(url + "rooms");
-    const response = await fetch("http://localhost:4000/rooms");
+    const response = await fetch(url + "rooms");
     const rooms = await response.json();
     setRooms(rooms);
   }
