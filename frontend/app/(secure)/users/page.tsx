@@ -37,36 +37,39 @@ function Users() {
     {
       title: "Action",
       key: "action",
+      align: "center",
       render: (_, user) => (
         <Space>
-              <Link href={`/users/edit/${user.id}`} className="me-1">
-                <Button type="primary">Edit</Button>
-              </Link>
-              <Button
-                type="primary"
-                danger
-                onClick={() => userService.delete(user.id)}
-                disabled={user.isDeleting}
-              >
-                {user.isDeleting ? (
-                  <span className="spinner-border spinner-border-sm"></span>
-                ) : (
-                  <span>Delete</span>
-                )}
-              </Button>
-            </Space>
+          <Link href={`/users/edit/${user.id}`} className="me-1">
+            <Button type="primary">Edit</Button>
+          </Link>
+          <Button
+            type="primary"
+            danger
+            onClick={() => userService.delete(user.id)}
+            disabled={user.isDeleting}
+          >
+            {user.isDeleting ? (
+              <span className="spinner-border spinner-border-sm"></span>
+            ) : (
+              <span>Delete</span>
+            )}
+          </Button>
+        </Space>
       ),
     },
   ];
 
   return (
     <>
-      <h2>Users</h2>
-      <Link href="/users/add">
-        <Button type="primary" className="mb-3">
-          Add User
-        </Button>
-      </Link>
+      <div className="d-flex justify-between align-items-center">
+        <h2>Users</h2>
+        <Link href="/users/add">
+          <Button type="primary">
+            Add User
+          </Button>
+        </Link>
+      </div>
       <Table
         columns={columns}
         rowKey={(record) => record.id}

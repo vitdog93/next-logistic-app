@@ -2,7 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { Space, Table, Tag, Button, Spin, Dropdown } from "antd";
+import {
+  Space,
+  Table,
+  Tag,
+  Button,
+  Spin,
+  Dropdown,
+  message,
+  Popconfirm,
+} from "antd";
 import type { ColumnsType, TablePaginationConfig } from "antd/es/table";
 import { DownOutlined } from "@ant-design/icons";
 import { MenuProps, Tooltip } from "antd";
@@ -134,7 +143,7 @@ function Orders() {
       key: "orderNumber",
       responsive: ["md"],
       width: 90,
-      fixed: 'left',
+      fixed: "left",
     },
     {
       title: "Customer Name",
@@ -142,7 +151,7 @@ function Orders() {
       key: "name",
       render: (customer) => `${customer.firstName} ${customer.lastName}`,
       responsive: ["md"],
-      width: 100
+      width: 100,
     },
     {
       title: "Recipient Address",
@@ -178,7 +187,7 @@ function Orders() {
       key: "shippingAt",
       render: (time) => formatTimeDisplay(time),
       responsive: ["md"],
-      width: 110
+      width: 110,
     },
     {
       title: "Delivery Date",
@@ -186,7 +195,7 @@ function Orders() {
       key: "deliveryAt",
       render: (time) => formatTimeDisplay(time),
       responsive: ["md"],
-      width: 110
+      width: 110,
     },
     {
       title: "Status",
@@ -195,7 +204,7 @@ function Orders() {
       render: (_, { id, status }) =>
         displayOrderStatus(currentUser, status, id),
       responsive: ["md"],
-      width: 150      
+      width: 150,
     },
     {
       title: "Action",
@@ -227,14 +236,17 @@ function Orders() {
                   Edit
                 </Button>
               </Link>
-              <Button
-                onClick={() => orderService.delete(order.id)}
-                type="primary"
-                danger
-                loading={order.isDeleting}
+              <Popconfirm
+                title="Delete the task"
+                description="Are you sure to delete this order?"
+                onConfirm={() => orderService.delete(order.id)}
+                okText="Yes"
+                cancelText="No"
               >
-                Delete
-              </Button>
+                <Button type="primary" danger loading={order.isDeleting}>
+                  Delete
+                </Button>
+              </Popconfirm>
               {order.rating ? (
                 <Button
                   type="link"
